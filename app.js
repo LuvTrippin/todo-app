@@ -40,10 +40,21 @@ function printTodos(todos) {
     });
 }
 
-function addOptions(users) {
+function createUser(name) {
+    const op = document.createElement('option');
+    op.innerText = name;
+    
+    return op;
+}
+
+function printUser(user) {
     const select = document.querySelector('#user-todo');
+    select.append(createUser(user.name));
+}
+
+function printUsers(users) {
     users.forEach(user => {
-        select.insertAdjacentHTML('beforeend', `<option>${user.name}</option>`);
+        printUser(user);
     });
 }
 
@@ -53,7 +64,7 @@ function initApp() {
         todos.push(...values[0]);
         users.push(...values[1]);
 
-        addOptions(users);
+        printUsers(users);
         printTodos(todos);
     })
 }
