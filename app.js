@@ -23,6 +23,7 @@ function createTodoElement({id, userId, title, completed}) {
     const close = document.createElement('span');
     close.innerHTML = '&times';
     close.className = 'close';
+    close.addEventListener('click', handleClose);
 
     li.prepend(status);
     li.append(close);
@@ -72,8 +73,13 @@ function handleSubmit(event) {
     this.reset();
 }
 
-function handleStatusChange(event) {
+function handleStatusChange() {
     changeTodoStatus(this.parentElement.dataset.id);
+}
+
+function handleClose() {
+    deleteTodo(this.parentElement.dataset.id);
+    this.parentElement.remove();
 }
 
 function initApp() {
@@ -129,4 +135,13 @@ async function changeTodoStatus(todoId) {
     });
 
     const data = await response.json();
+}
+
+async function deleteTodo(todoId) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
 }
