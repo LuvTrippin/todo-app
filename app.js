@@ -40,16 +40,17 @@ function printTodos(todos) {
     });
 }
 
-function createUserOption(name) {
+function createUserOption(user) {
     const op = document.createElement('option');
-    op.innerText = name;
+    op.value = user.userId;
+    op.innerText = user.name;
     
     return op;
 }
 
 function printUserOption(user) {
     const select = document.querySelector('#user-todo');
-    select.append(createUserOption(user.name));
+    select.append(createUserOption(user));
 }
 
 function printUsersOptions(users) {
