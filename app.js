@@ -40,7 +40,7 @@ function printTodos(todos) {
     });
 }
 
-function createUser(name) {
+function createUserOption(name) {
     const op = document.createElement('option');
     op.innerText = name;
     
@@ -49,7 +49,7 @@ function createUser(name) {
 
 function printUser(user) {
     const select = document.querySelector('#user-todo');
-    select.append(createUser(user.name));
+    select.append(createUserOption(user.name));
 }
 
 function printUsers(users) {
