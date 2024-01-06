@@ -9,7 +9,7 @@ function getUserName(userId) {
     return user.name;
 }
 
-function createTodo({id, userId, title, completed}) {
+function createTodoElement({id, userId, title, completed}) {
     const li = document.createElement('li');
     li.className = "todo-item";
     li.dataset.id = id;
@@ -31,7 +31,7 @@ function createTodo({id, userId, title, completed}) {
 
 function printTodo(todo) {
     const todoList = document.querySelector('#todo-list');
-    todoList.prepend(createTodo(todo));
+    todoList.prepend(createTodoElement(todo));
 }
 
 function printTodos(todos) {
@@ -59,6 +59,18 @@ function printUsersOptions(users) {
     });
 }
 
+function handleSubmit(event) {
+    event.preventDefault();
+
+    createTodo({
+        userId: Number(this.user.value),
+        title: this.todo.value,
+        completed: false,
+    });
+
+    this.reset();
+}
+
 function initApp() {
     Promise.all([getAllTodos(), getAllUsers()])
     .then(values => {
@@ -68,6 +80,9 @@ function initApp() {
         printUsersOptions(users);
         printTodos(todos);
     })
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', handleSubmit);
 }
 
 
@@ -85,3 +100,16 @@ async function getAllUsers() {
     return data
 }
 
+async function createTodo(todo) {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+        method: 'POST',
+        body: JSON.stringify(todo),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    const newTodo = await response.json();
+    
+    printTodo(newTodo);
+}
