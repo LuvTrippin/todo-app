@@ -18,6 +18,7 @@ function createTodoElement({id, userId, title, completed}) {
     const status = document.createElement('input');
     status.type = 'checkbox';
     status.checked = completed;
+    status.addEventListener('click', handleStatusChange);
 
     const close = document.createElement('span');
     close.innerHTML = '&times';
@@ -71,6 +72,10 @@ function handleSubmit(event) {
     this.reset();
 }
 
+function handleStatusChange(event) {
+    changeTodoStatus(this.parentElement.dataset.id);
+}
+
 function initApp() {
     Promise.all([getAllTodos(), getAllUsers()])
     .then(values => {
@@ -112,4 +117,16 @@ async function createTodo(todo) {
     const newTodo = await response.json();
     
     printTodo(newTodo);
+}
+
+async function changeTodoStatus(todoId) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({status: this.checked}),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    const data = await response.json();
 }
