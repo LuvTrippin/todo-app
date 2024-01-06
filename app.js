@@ -47,14 +47,14 @@ function createUserOption(name) {
     return op;
 }
 
-function printUser(user) {
+function printUserOption(user) {
     const select = document.querySelector('#user-todo');
     select.append(createUserOption(user.name));
 }
 
-function printUsers(users) {
+function printUsersOptions(users) {
     users.forEach(user => {
-        printUser(user);
+        printUserOption(user);
     });
 }
 
@@ -64,7 +64,7 @@ function initApp() {
         todos.push(...values[0]);
         users.push(...values[1]);
 
-        printUsers(users);
+        printUsersOptions(users);
         printTodos(todos);
     })
 }
