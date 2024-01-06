@@ -5,7 +5,7 @@ body {
     margin: 0;
     font-size: 1.2rem;
 }
-header {
+header, footer {
     background-color: mediumorchid;
     color: white;
     height: 100px;
@@ -63,4 +63,9 @@ ul {
 
 li span.todo {
     width: 430px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
