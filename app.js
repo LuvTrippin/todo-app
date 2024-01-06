@@ -13,7 +13,7 @@ function createTodo({id, userId, title, completed}) {
     const li = document.createElement('li');
     li.className = "todo-item";
     li.dataset.id = id;
-    li.innerHTML = `<span>${title} <i>by</i> <b>${getUserName(userId)}</b></span>`;
+    li.innerHTML = `<span class="todo">${title} <i>by</i> <b>${getUserName(userId)}</b></span>`;
 
     const status = document.createElement('input');
     status.type = 'checkbox';

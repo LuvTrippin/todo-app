@@ -60,3 +60,7 @@ ul {
 .close:hover {
     color:tomato
 }
+
+li span.todo {
+    width: 430px;
+}
