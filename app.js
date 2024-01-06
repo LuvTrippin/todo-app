@@ -42,7 +42,7 @@ function printTodos(todos) {
 
 function createUserOption(user) {
     const op = document.createElement('option');
-    op.value = user.userId;
+    op.value = user.id;
     op.innerText = user.name;
     
     return op;
