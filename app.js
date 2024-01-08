@@ -42,6 +42,15 @@ function printTodos(todos) {
     });
 }
 
+function removeTodo(todoId) {
+    todos.filter(todo => todo.id !== todoId);
+
+    const todo = document.querySelector('ul').querySelector(`[data-id="${todoId}"]`);
+    todo.querySelector('input').removeEventListener('change', handleStatusChange);
+    todo.querySelector('.close').removeEventListener('click', handleClose);
+    todo.remove();
+}
+
 function createUserOption(user) {
     const op = document.createElement('option');
     op.value = user.id;
@@ -79,7 +88,6 @@ function handleStatusChange() {
 
 function handleClose() {
     deleteTodo(this.parentElement.dataset.id);
-    this.parentElement.remove();
 }
 
 function initApp() {
@@ -142,4 +150,8 @@ async function deleteTodo(todoId) {
             'Content-Type': 'application/json',
         },
     })
+
+    if (response.ok) {
+        removeTodo(todoId);
+    }
 }
