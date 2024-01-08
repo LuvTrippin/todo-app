@@ -125,16 +125,17 @@ async function createTodo(todo) {
     printTodo(newTodo);
 }
 
-async function changeTodoStatus(todoId, status) {
+async function changeTodoStatus(todoId, completed) {
     const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
         method: 'PATCH',
-        body: JSON.stringify({status: status}),
+        body: JSON.stringify({completed}),
         headers: {
             'Content-Type': 'application/json',
         },
     });
-    
+
     const data = await response.json();
+    console.log(data);
 }
 
 async function deleteTodo(todoId) {
