@@ -74,7 +74,7 @@ function handleSubmit(event) {
 }
 
 function handleStatusChange() {
-    changeTodoStatus(this.parentElement.dataset.id);
+    changeTodoStatus(this.parentElement.dataset.id, this.checked);
 }
 
 function handleClose() {
@@ -125,15 +125,15 @@ async function createTodo(todo) {
     printTodo(newTodo);
 }
 
-async function changeTodoStatus(todoId) {
+async function changeTodoStatus(todoId, status) {
     const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
         method: 'PATCH',
-        body: JSON.stringify({status: this.checked}),
+        body: JSON.stringify({status: status}),
         headers: {
             'Content-Type': 'application/json',
         },
     });
-
+    
     const data = await response.json();
 }
 
