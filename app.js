@@ -51,6 +51,10 @@ function removeTodo(todoId) {
     todo.remove();
 }
 
+function alertError(error) {
+    alert(error.message);
+}
+
 function createUserOption(user) {
     const op = document.createElement('option');
     op.value = user.id;
@@ -106,52 +110,72 @@ function initApp() {
 
 
 async function getAllTodos() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-    const data = await response.json();
-
-    return data
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+        const data = await response.json();
+    
+        return data   
+    } catch (error) {
+        alertError(error);
+    }
 }
 
 async function getAllUsers() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data = await response.json();
-
-    return data
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        const data = await response.json();
+    
+        return data
+    } catch (error) {
+        alertError(error);
+    }
 }
 
 async function createTodo(todo) {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
-        method: 'POST',
-        body: JSON.stringify(todo),
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+            method: 'POST',
+            body: JSON.stringify(todo),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
 
-    const newTodo = await response.json();
-    
-    printTodo(newTodo);
+        const newTodo = await response.json();
+        
+        printTodo(newTodo);
+    } catch (error) {
+        alertError(error);
+    }
 }
 
 async function changeTodoStatus(todoId, completed) {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
-        method: 'PATCH',
-        body: JSON.stringify({completed}),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
+            method: 'PATCH',
+            body: JSON.stringify({completed}),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    } catch (error) {
+        alertError(error);
+    }
 }
 
 async function deleteTodo(todoId) {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
 
-    if (response.ok) {
-        removeTodo(todoId);
+        if (response.ok) {
+            removeTodo(todoId);
+        }
+    } catch (error) {
+        alertError(error);
     }
 }
