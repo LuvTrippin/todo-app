@@ -4,6 +4,7 @@
 body {
     margin: 0;
     font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 header, footer {
     background-color: mediumorchid;
@@ -13,7 +14,6 @@ header, footer {
     text-align: center;
 }
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
 }
 form {
