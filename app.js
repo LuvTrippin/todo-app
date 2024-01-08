@@ -18,7 +18,7 @@ function createTodoElement({id, userId, title, completed}) {
     const status = document.createElement('input');
     status.type = 'checkbox';
     status.checked = completed;
-    status.addEventListener('click', handleStatusChange);
+    status.addEventListener('change', handleStatusChange);
 
     const close = document.createElement('span');
     close.innerHTML = '&times';
