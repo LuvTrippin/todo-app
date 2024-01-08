@@ -112,6 +112,11 @@ function initApp() {
 async function getAllTodos() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+
+        if (!response.ok) {
+            throw new Error('Cannot fetch');
+        }
+        
         const data = await response.json();
     
         return data   
@@ -123,8 +128,13 @@ async function getAllTodos() {
 async function getAllUsers() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+        if (!response.ok) {
+            throw new Error('Cannot fetch');
+        }
+
         const data = await response.json();
-    
+
         return data
     } catch (error) {
         alertError(error);
@@ -140,6 +150,10 @@ async function createTodo(todo) {
                 'Content-Type': 'application/json',
             }
         });
+
+        if (!response.ok) {
+            throw new Error('Cannot fetch');
+        }
 
         const newTodo = await response.json();
         
@@ -158,6 +172,11 @@ async function changeTodoStatus(todoId, completed) {
                 'Content-Type': 'application/json',
             },
         });
+
+        if (!response.ok) {
+            throw new Error('Cannot fetch');
+        }
+
     } catch (error) {
         alertError(error);
     }
@@ -174,7 +193,10 @@ async function deleteTodo(todoId) {
 
         if (response.ok) {
             removeTodo(todoId);
+        } else {
+            throw new Error('Cannot fetch');
         }
+
     } catch (error) {
         alertError(error);
     }
